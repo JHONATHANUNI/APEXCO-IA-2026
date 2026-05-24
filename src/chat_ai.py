@@ -1,12 +1,24 @@
-import anthropic
-import os
-import json
+from ollama import chat
 
 
-def build_context(metrics=None, recommendations=None, patterns=None, sellers_df=None, brands_df=None, low_conversion_df=None):
-    """Construye el contexto del negocio para pasarle a Claude."""
+def build_context(
+    metrics=None,
+    recommendations=None,
+    patterns=None,
+    sellers_df=None,
+    brands_df=None,
+    low_conversion_df=None
+):
+    """
+    Construye el contexto inteligente del concesionario
+    para APEXCO IA usando datos reales del negocio.
+    """
+
     context_parts = []
 
+    # =========================
+    # MÉTRICAS PRINCIPALES
+    # =========================
     if metrics:
         context_parts.append(f"""
 MÉTRICAS ACTUALES DEL CONCESIONARIO:
@@ -18,6 +30,9 @@ MÉTRICAS ACTUALES DEL CONCESIONARIO:
 - Visitas promedio por registro: {metrics.get('visitas_promedio', 0):.2f}
 """)
 
+    # =========================
+    # PATRONES
+    # =========================
     if patterns:
         context_parts.append(f"""
 PATRONES DETECTADOS:
@@ -26,42 +41,74 @@ PATRONES DETECTADOS:
 - Horas de mayor tráfico: {patterns.get('high_traffic_hours', [])}
 """)
 
+    # =========================
+    # RECOMENDACIONES
+    # =========================
     if recommendations:
+        recommendations_text = "\n".join(
+            f"- {r}" for r in recommendations
+        )
+
         context_parts.append(f"""
 RECOMENDACIONES DEL SISTEMA:
-{chr(10).join(f'- {r}' for r in recommendations)}
+{recommendations_text}
 """)
 
+    # =========================
+    # TOP VENDEDORES
+    # =========================
     if sellers_df is not None and len(sellers_df) > 0:
+
         top3 = sellers_df.head(3)
+
         sellers_info = "\n".join(
-            f"  • {row['vendedor']}: {row['ventas']:.0f} ventas, conversión {row['ventas']/row['visitas']:.2%}"
-            for _, row in top3.iterrows() if row['visitas'] > 0
+            f"• {row['vendedor']}: "
+            f"{row['ventas']:.0f} ventas | "
+            f"Conversión {(row['ventas'] / row['visitas']):.2%}"
+            for _, row in top3.iterrows()
+            if row['visitas'] > 0
         )
+
         context_parts.append(f"""
 TOP VENDEDORES:
 {sellers_info}
 """)
 
+    # =========================
+    # TOP MARCAS
+    # =========================
     if brands_df is not None and len(brands_df) > 0:
+
         top3b = brands_df.head(3)
+
         brands_info = "\n".join(
-            f"  • {row['marca']}: {row['ventas']:.0f} ventas"
+            f"• {row['marca']}: {row['ventas']:.0f} ventas"
             for _, row in top3b.iterrows()
         )
+
         context_parts.append(f"""
 TOP MARCAS:
 {brands_info}
 """)
 
+    # =========================
+    # HORAS MALAS
+    # =========================
     if low_conversion_df is not None and len(low_conversion_df) > 0:
+
         hours = low_conversion_df['hora_int'].tolist()
+
         context_parts.append(f"""
-HORAS CON BAJA CONVERSIÓN (menor al 15%): {hours}
+HORAS CON BAJA CONVERSIÓN (menos del 15%):
+{hours}
 """)
 
     return "\n".join(context_parts) if context_parts else "No hay datos disponibles aún."
 
+
+# ==========================================================
+# CHAT PRINCIPAL APEXCO IA
+# ==========================================================
 
 def get_chat_response(
     user_text,
@@ -74,56 +121,106 @@ def get_chat_response(
     conversation_history=None
 ):
     """
-    Llama a la API de Claude con el contexto del negocio y el historial de conversación.
-    Retorna la respuesta como string.
+    Chat inteligente local usando Ollama + Qwen 2.5.
+    NO usa créditos.
+    NO usa internet.
+    TODO corre localmente.
     """
-    api_key = os.getenv("ANTHROPIC_API_KEY")
-    if not api_key:
-        return "⚠️ No se encontró la API key de Anthropic. Configura ANTHROPIC_API_KEY en tu archivo .env"
 
-    context = build_context(metrics, recommendations, patterns, sellers_df, brands_df, low_conversion_df)
+    # =========================
+    # CONTEXTO DEL NEGOCIO
+    # =========================
+    context = build_context(
+        metrics,
+        recommendations,
+        patterns,
+        sellers_df,
+        brands_df,
+        low_conversion_df
+    )
 
-    system_prompt = f"""Eres APEX, el asistente de inteligencia artificial de APEXCO AI, una plataforma de análisis operativo para concesionarios de autos en Colombia.
+    # =========================
+    # SYSTEM PROMPT
+    # =========================
+    system_prompt = f"""
+Eres APEX, la inteligencia artificial de APEXCO IA.
 
-Tu rol es actuar como un auditor comercial experto que analiza los datos del concesionario y da recomendaciones claras, directas y accionables.
+APEXCO IA es una plataforma SaaS de auditoría inteligente para concesionarios de autos en Colombia.
 
-DATOS ACTUALES DEL CONCESIONARIO:
+Tu trabajo es analizar métricas comerciales y operativas para detectar:
+
+- pérdidas de ventas
+- problemas de conversión
+- horarios muertos
+- vendedores con bajo rendimiento
+- oportunidades comerciales
+- patrones de comportamiento
+
+Debes actuar como:
+
+- auditor comercial senior
+- consultor estratégico automotriz
+- analista operativo
+- experto en ventas
+
+DATOS ACTUALES:
 {context}
 
-INSTRUCCIONES:
-- Responde siempre en español, de forma clara y directa
-- Usa los datos reales del contexto para fundamentar tus respuestas
-- Si detectas problemas, sé específico: menciona números, horas, vendedores o marcas exactas
-- Da recomendaciones concretas y accionables, no genéricas
-- Si te preguntan algo que no está en los datos, dilo honestamente
-- Usa emojis con moderación para hacer la respuesta más visual
-- Máximo 150 palabras por respuesta, sé conciso y poderoso
-- Nunca inventes datos que no están en el contexto
-"""
+REGLAS:
 
+- Responde SIEMPRE en español
+- Sé profesional y ejecutivo
+- Usa los datos reales
+- Nunca inventes información
+- Da recomendaciones accionables
+- Usa bullets cuando sea útil
+- Sé directo y estratégico
+- Máximo 180 palabras
+- Si detectas un problema importante, dilo claramente
+- Prioriza insights de negocio y rentabilidad
+"""
+    # =========================
+    # HISTORIAL DE CHAT
+    # =========================
     messages = []
+
     if conversation_history:
-        for msg in conversation_history[-6:]:  # últimos 6 mensajes para no saturar tokens
+
+        for msg in conversation_history[-6:]:
+
             messages.append({
                 "role": msg["role"],
                 "content": msg["content"]
             })
 
-    messages.append({"role": "user", "content": user_text})
+    # MENSAJE ACTUAL
+    messages.append({
+        "role": "user",
+        "content": user_text
+    })
 
+    # =========================
+    # RESPUESTA IA LOCAL
+    # =========================
     try:
-        client = anthropic.Anthropic(api_key=api_key)
-        response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=300,
-            system=system_prompt,
-            messages=messages
-        )
-        return response.content[0].text
 
-    except anthropic.AuthenticationError:
-        return "❌ API key inválida. Verifica tu ANTHROPIC_API_KEY en el archivo .env"
-    except anthropic.RateLimitError:
-        return "⏳ Límite de uso alcanzado. Intenta en unos segundos."
+        response = chat(
+            model="gemma3:4b",
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                *messages
+            ],
+            
+            options={
+        "temperature": 0.4,
+        "num_predict": 250
+    }
+)
+        return response["message"]["content"]
+
     except Exception as e:
-        return f"❌ Error al conectar con la IA: {str(e)}"
+
+        return f"❌ Error al conectar con Ollama: {str(e)}"
