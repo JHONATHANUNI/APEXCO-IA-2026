@@ -1,9 +1,9 @@
 import pandas as pd
 
+# Solo las columnas estrictamente necesarias para que el sistema funcione
 REQUIRED_COLUMNS = [
-    "fecha", "hora", "concesionario", "vendedor", "marca", "modelo",
-    "pais_origen", "tipo_auto", "color", "precio_lista", "descuento",
-    "precio_final", "estado_lead", "visita", "venta", "canal"
+    "fecha", "hora", "vendedor", "marca",
+    "precio_final", "visita", "venta"
 ]
 
 NUMERIC_COLUMNS = ["precio_lista", "descuento", "precio_final", "visita", "venta"]

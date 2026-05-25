@@ -26,553 +26,644 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ─── GLOBAL CSS — TEMA CLARO PROFESIONAL ───────────────────────────────────────
+
+# ─── GLOBAL CSS — TEMA OSCURO PROFESIONAL ──────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap');
 
-/* ── VARIABLES ── */
+/* ── DESIGN TOKENS ── */
 :root {
-    --bg:          #F7F7F5;
-    --bg-card:     #FFFFFF;
-    --bg-subtle:   #F0EFEC;
-    --bg-hover:    #ECEAE6;
-    --border:      #E2E0DB;
-    --border-med:  #D4D1CB;
-    --text-primary:   #1A1916;
-    --text-secondary: #5C5A55;
-    --text-muted:     #9B9890;
-    --accent:      #D4521A;
-    --accent-light: #F5EDE7;
-    --accent-soft:  #FAF3EF;
-    --accent2:     #E8860A;
-    --green:       #2A7D4F;
-    --green-light: #EAF5EE;
-    --red:         #C1392B;
-    --red-light:   #FCECEA;
-    --blue:        #2563EB;
-    --blue-light:  #EFF4FF;
-    --amber:       #B45309;
-    --amber-light: #FFFBEB;
-    --shadow-xs:   0 1px 3px rgba(26,25,22,0.06);
-    --shadow-sm:   0 2px 8px rgba(26,25,22,0.08);
-    --shadow-md:   0 4px 16px rgba(26,25,22,0.10);
-    --radius-sm:   8px;
-    --radius-md:   12px;
-    --radius-lg:   16px;
-    --radius-xl:   20px;
+    --bg:           #09090B;
+    --bg-1:         #101014;
+    --bg-2:         #18181C;
+    --bg-3:         #1E1E24;
+    --bg-hover:     #242429;
+    --border:       rgba(255,255,255,0.06);
+    --border-med:   rgba(255,255,255,0.10);
+    --border-hi:    rgba(255,255,255,0.16);
+
+    --text-1:       #F4F4F5;
+    --text-2:       #A1A1AA;
+    --text-3:       #52525B;
+
+    --copper:       #C8622A;
+    --copper-lo:    rgba(200,98,42,0.08);
+    --copper-mid:   rgba(200,98,42,0.16);
+    --copper-hi:    rgba(200,98,42,0.28);
+    --copper-glow:  rgba(200,98,42,0.40);
+
+    --green:        #22C55E;
+    --green-lo:     rgba(34,197,94,0.08);
+    --green-mid:    rgba(34,197,94,0.16);
+    --red:          #EF4444;
+    --red-lo:       rgba(239,68,68,0.08);
+    --red-mid:      rgba(239,68,68,0.16);
+    --amber:        #F59E0B;
+    --amber-lo:     rgba(245,158,11,0.08);
+    --amber-mid:    rgba(245,158,11,0.16);
+    --blue:         #3B82F6;
+    --blue-lo:      rgba(59,130,246,0.08);
+    --blue-mid:     rgba(59,130,246,0.16);
+
+    --radius-xs:    4px;
+    --radius-sm:    6px;
+    --radius-md:    10px;
+    --radius-lg:    14px;
+    --radius-xl:    18px;
+
+    --shadow-card:  0 1px 0 rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.4);
+    --shadow-glow:  0 0 40px rgba(200,98,42,0.12);
 }
 
-/* ── RESET BASE ── */
+/* ── BASE ── */
 html, body, [class*="css"] {
-    font-family: 'DM Sans', sans-serif !important;
-    background-color: var(--bg) !important;
-    color: var(--text-primary) !important;
-}
-.stApp {
+    font-family: 'Geist', sans-serif !important;
     background: var(--bg) !important;
+    color: var(--text-1) !important;
+    -webkit-font-smoothing: antialiased;
 }
+.stApp { background: var(--bg) !important; }
 *, *::before, *::after { box-sizing: border-box; }
+.block-container { padding-top: 0 !important; max-width: 100% !important; }
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-subtle); }
-::-webkit-scrollbar-thumb { background: var(--border-med); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-3); border-radius: 2px; }
 
 /* ── HERO ── */
 .apex-hero {
-    background: #FFFFFF;
+    background: var(--bg-1);
     border-bottom: 1px solid var(--border);
-    padding: 2.5rem 2.5rem 2rem;
-    margin: -1rem -1rem 2rem -1rem;
+    padding: 2.8rem 3rem 2.4rem;
+    margin: 0 -1rem 2.5rem -1rem;
     position: relative;
     overflow: hidden;
+}
+.apex-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
 }
 .apex-hero::before {
     content: '';
     position: absolute;
-    top: 0; right: 0;
-    width: 320px; height: 100%;
-    background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 60%);
+    top: -60px; right: -60px;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(200,98,42,0.14) 0%, transparent 70%);
     pointer-events: none;
 }
 .apex-hero-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
 }
-.apex-badge {
-    display: inline-flex;
+.apex-eyebrow {
+    display: flex;
     align-items: center;
-    gap: 0.45rem;
-    background: var(--accent-light);
-    border: 1px solid rgba(212,82,26,0.25);
-    color: var(--accent);
-    font-size: 0.68rem;
-    padding: 0.25rem 0.8rem;
-    border-radius: 100px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+}
+.apex-eyebrow-line {
+    width: 24px;
+    height: 1px;
+    background: var(--copper);
+    opacity: 0.7;
+}
+.apex-eyebrow-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
-    width: fit-content;
-}
-.apex-badge-dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse-dot 2.5s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.4; transform: scale(0.6); }
+    color: var(--copper);
+    font-weight: 400;
 }
 .apex-logo {
-    font-family: 'Instrument Serif', serif;
-    font-size: 2.6rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 1;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-1);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
     margin: 0;
-    letter-spacing: -0.02em;
 }
-.apex-logo span {
-    color: var(--accent);
-    font-style: italic;
-}
+.apex-logo-accent { color: var(--copper); }
 .apex-tagline {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-3);
+    margin-top: 0.75rem;
     font-weight: 400;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
+    font-family: 'IBM Plex Mono', monospace;
 }
-.apex-hero-stats {
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.2rem 1.8rem;
-}
-.hero-stat-val {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 1;
-}
-.hero-stat-lbl {
+.apex-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--green-lo);
+    border: 1px solid rgba(34,197,94,0.2);
+    color: var(--green);
     font-size: 0.65rem;
-    color: var(--text-muted);
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-top: 0.2rem;
+    margin-bottom: 1.4rem;
+}
+.apex-status-dot {
+    width: 5px; height: 5px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--green);
+    animation: blink 3s ease-in-out infinite;
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
 /* ── SECTION HEADERS ── */
 .section-eyebrow {
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--text-3);
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    margin-bottom: 0.3rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 1px;
+    background: var(--copper);
+    opacity: 0.6;
+    flex-shrink: 0;
 }
 .section-heading {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    margin: 0 0 1.2rem 0;
-    letter-spacing: -0.01em;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-1);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 /* ── DIVIDER ── */
 .apex-divider {
     height: 1px;
     background: var(--border);
-    margin: 2.5rem 0;
+    margin: 3rem 0;
+    position: relative;
+}
+.apex-divider::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 60px; height: 1px;
+    background: var(--copper);
+    opacity: 0.4;
 }
 
 /* ── METRIC CARDS ── */
 .metric-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    background: var(--bg-1);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius-lg);
-    padding: 1.5rem 1.6rem;
+    padding: 1.6rem 1.8rem;
     position: relative;
     overflow: hidden;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    box-shadow: var(--shadow-xs);
+    transition: border-color 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-card);
+}
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--copper) 0%, transparent 60%);
+    opacity: 0.5;
 }
 .metric-card:hover {
     border-color: var(--border-med);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-card), var(--shadow-glow);
 }
-.metric-card-accent {
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px; height: 100%;
-    background: linear-gradient(180deg, var(--accent), var(--accent2));
-    border-radius: 0;
-}
-.metric-icon {
-    font-size: 1.4rem;
-    margin-bottom: 0.9rem;
+.metric-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1.2rem;
     display: block;
 }
 .metric-value {
-    font-family: 'Instrument Serif', serif;
-    font-size: 2.4rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-    letter-spacing: -0.02em;
+    font-family: 'Geist', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-1);
+    line-height: 1.05;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.03em;
+
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
 }
+ /* ── KPI PERCENT FIX ── */
+.metric-percent {
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}          
 .metric-label {
     font-size: 0.72rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 500;
+    color: var(--text-2);
+    letter-spacing: 0.02em;
+    font-weight: 400;
 }
 .metric-delta {
-    font-size: 0.75rem;
-    margin-top: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    margin-top: 0.8rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    padding: 0.2rem 0.65rem;
-    border-radius: 100px;
-    font-weight: 500;
+    gap: 0.35rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: var(--radius-xs);
+    font-weight: 400;
+    letter-spacing: 0.05em;
 }
-.metric-delta.good {
-    background: var(--green-light);
-    color: var(--green);
-    border: 1px solid rgba(42,125,79,0.2);
-}
-.metric-delta.bad {
-    background: var(--red-light);
-    color: var(--red);
-    border: 1px solid rgba(193,57,43,0.2);
-}
-.metric-delta.neutral {
-    background: var(--amber-light);
-    color: var(--amber);
-    border: 1px solid rgba(180,83,9,0.2);
-}
+.metric-delta.good  { background: var(--green-lo);  color: var(--green);  border: 1px solid rgba(34,197,94,0.15); }
+.metric-delta.bad   { background: var(--red-lo);    color: var(--red);    border: 1px solid rgba(239,68,68,0.15); }
+.metric-delta.warn  { background: var(--amber-lo);  color: var(--amber);  border: 1px solid rgba(245,158,11,0.15); }
 
 /* ── CHART CARDS ── */
 .chart-card {
-    background: var(--bg-card);
+    background: var(--bg-1);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 1.5rem 1.5rem 0.5rem;
-    box-shadow: var(--shadow-xs);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
     margin-bottom: 1rem;
 }
 
 /* ── AUDIT / ALERT CARDS ── */
 .audit-card {
-    background: var(--bg-card);
+            
+    backdrop-filter: blur(8px);       
+    background: var(--bg-1);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 1rem 1.3rem;
-    margin-bottom: 0.6rem;
+    padding: 1rem 1.4rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: flex-start;
-    gap: 0.9rem;
-    transition: box-shadow 0.2s;
-    box-shadow: var(--shadow-xs);
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
+    gap: 1rem;
+    transition: border-color 0.2s;
+    font-size: 0.83rem;
+    color: var(--text-2);
+    line-height: 1.65;
 }
-.audit-card:hover { box-shadow: var(--shadow-sm); }
-.audit-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.audit-card:hover { border-color: var(--border-med); }
+.audit-icon {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-3);
+    font-style: normal;
+}
 .audit-card.warning {
-    border-left: 3px solid var(--accent2);
-    background: var(--amber-light);
+    border-left: 2px solid var(--amber);
+    background: var(--amber-lo);
 }
 .audit-card.danger {
-    border-left: 3px solid var(--red);
-    background: var(--red-light);
+    border-left: 2px solid var(--red);
+    background: var(--red-lo);
 }
 .audit-card.success {
-    border-left: 3px solid var(--green);
-    background: var(--green-light);
+    border-left: 2px solid var(--green);
+    background: var(--green-lo);
 }
 .audit-card.info {
-    border-left: 3px solid var(--blue);
-    background: var(--blue-light);
+    border-left: 2px solid var(--blue);
+    background: var(--blue-lo);
 }
+.audit-text strong { color: var(--text-1); font-weight: 600; }
 
 /* ── PATTERN PILLS ── */
-.pills-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+.pills-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
 .pattern-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    background: var(--bg-subtle);
+    gap: 0.5rem;
+    background: var(--bg-2);
     border: 1px solid var(--border-med);
-    border-radius: 100px;
-    padding: 0.38rem 1rem;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    border-radius: var(--radius-xs);
+    padding: 0.35rem 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-2);
+    font-weight: 400;
+    letter-spacing: 0.05em;
     white-space: nowrap;
 }
-.pattern-pill.good  { border-color: rgba(42,125,79,0.35);  color: var(--green);  background: var(--green-light); }
-.pattern-pill.bad   { border-color: rgba(193,57,43,0.35);  color: var(--red);    background: var(--red-light); }
-.pattern-pill.info  { border-color: rgba(180,83,9,0.35);   color: var(--amber);  background: var(--amber-light); }
+.pattern-pill.good  { border-color: rgba(34,197,94,0.25);   color: var(--green);  background: var(--green-lo); }
+.pattern-pill.bad   { border-color: rgba(239,68,68,0.25);   color: var(--red);    background: var(--red-lo); }
+.pattern-pill.info  { border-color: rgba(245,158,11,0.25);  color: var(--amber);  background: var(--amber-lo); }
 
 /* ── STATUS BADGE ── */
 .status-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--green-light);
-    border: 1px solid rgba(42,125,79,0.25);
+    background: var(--green-lo);
+    border: 1px solid rgba(34,197,94,0.2);
     color: var(--green);
-    font-size: 0.75rem;
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-size: 0.62rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-xs);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 .status-dot {
-    width: 7px; height: 7px;
+    width: 5px; height: 5px;
     background: var(--green);
     border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(42,125,79,0.25);
+    box-shadow: 0 0 6px var(--green);
+    animation: blink 3s ease-in-out infinite;
 }
 
 /* ── CHAT ── */
 .chat-wrapper {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
+    background: #FFFFFF;
+    border: 1px solid var(--border-med);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-card);
     margin-bottom: 1rem;
 }
 .chat-header {
-    background: linear-gradient(90deg, var(--accent-soft), #FFFFFF);
-    border-bottom: 1px solid var(--border);
-    padding: 1.2rem 1.6rem;
+    background: #F7F7F7;
+    border-bottom: 1px solid var(--border-med);
+    padding: 0.9rem 1.4rem;
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 1rem;
 }
-.chat-header-dot {
-    width: 10px; height: 10px;
+.chat-header-indicator {
+    width: 7px; height: 7px;
     background: var(--green);
     border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--green-light);
+    box-shadow: 0 0 6px var(--green);
     flex-shrink: 0;
+    animation: blink 3s ease-in-out infinite;
 }
 .chat-header-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--text-primary);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1A1916;
+    letter-spacing: -0.01em;
 }
 .chat-header-sub {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    margin-top: 0.1rem;
-}
-.chat-body {
-    padding: 1.2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: #9B9890;
+    margin-top: 0.15rem;
+    letter-spacing: 0.02em;
 }
 .msg-user {
-    background: var(--accent-light);
-    border: 1px solid rgba(212,82,26,0.15);
-    border-radius: 14px 14px 4px 14px;
-    padding: 0.8rem 1.1rem;
+    background: #F0F0EE;
+    border: 1px solid #E2E0DB;
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 1rem;
     margin-left: 3rem;
-    font-size: 0.875rem;
-    color: var(--text-primary);
-    line-height: 1.55;
+    font-size: 0.82rem;
+    color: #1A1916;
+    line-height: 1.6;
 }
 .msg-assistant {
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    border-radius: 14px 14px 14px 4px;
-    padding: 0.8rem 1.1rem;
+    background: #FFFFFF;
+    border: 1px solid #E2E0DB;
+    border-left: 2px solid var(--copper);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 1rem;
     margin-right: 3rem;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    line-height: 1.65;
+    font-size: 0.82rem;
+    color: #3A3A3A;
+    line-height: 1.7;
 }
 .msg-label {
-    font-size: 0.62rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.56rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 0.25rem;
-    font-weight: 600;
+    letter-spacing: 0.16em;
+    margin-bottom: 0.3rem;
+    font-weight: 400;
 }
-.msg-label.user { color: var(--accent); }
-.msg-label.apex { color: var(--text-muted); }
+[data-testid="stChatInput"] textarea {
+    background: #FFFFFF !important;
+    border: 1px solid #D4D1CB !important;
+    color: #1A1916 !important;
+    border-radius: var(--radius-md) !important;
+    font-family: 'Geist', sans-serif !important;
+    font-size: 0.85rem !important;
+}
+.msg-label.user { color: #9B9890; }
+.msg-label.apex { color: var(--copper); }    
+
 
 /* ── LANDING ── */
 .landing-empty {
     text-align: center;
-    padding: 5rem 2rem 4rem;
-    max-width: 600px;
+    padding: 6rem 2rem 5rem;
+    max-width: 580px;
     margin: 0 auto;
 }
-.landing-icon {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    display: block;
+.landing-mark {
+    width: 52px; height: 52px;
+    background: var(--copper-lo);
+    border: 1px solid var(--copper-mid);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
 }
 .landing-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.02em;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-1);
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
 }
 .landing-sub {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.8;
+    color: var(--text-2);
+    font-size: 0.85rem;
+    line-height: 1.85;
     margin: 0 auto 2rem;
+    font-weight: 400;
 }
 .landing-features {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    gap: 0.4rem;
+    margin-top: 2rem;
+}
+.landing-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--copper);
+    opacity: 0.5;
+    margin: 1.5rem auto;
 }
 
 /* ── ML SECTION ── */
 .ml-section {
-    background: var(--bg-card);
+    background: var(--bg-1);
     border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 1.8rem 2rem;
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.2rem;
     position: relative;
     overflow: hidden;
     margin-bottom: 1rem;
-    box-shadow: var(--shadow-xs);
+    box-shadow: var(--shadow-card);
 }
 .ml-section::before {
     content: '';
     position: absolute;
-    top: 0; right: 0;
-    width: 200px; height: 100%;
-    background: linear-gradient(135deg, var(--blue-light), transparent);
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--blue) 0%, transparent 50%);
+    opacity: 0.4;
+}
+.ml-section::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
     pointer-events: none;
-    opacity: 0.5;
 }
 .ml-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
 }
 .ml-icon-wrap {
-    width: 46px; height: 46px;
-    background: var(--blue-light);
-    border: 1px solid rgba(37,99,235,0.2);
-    border-radius: var(--radius-md);
+    width: 42px; height: 42px;
+    background: var(--blue-lo);
+    border: 1px solid var(--blue-mid);
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     flex-shrink: 0;
 }
 .ml-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    line-height: 1;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-1);
+    letter-spacing: -0.01em;
 }
 .ml-subtitle {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
-    letter-spacing: 0.04em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-3);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
 }
 .ml-badge {
     margin-left: auto;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: var(--green-light);
-    border: 1px solid rgba(42,125,79,0.25);
+    background: var(--green-lo);
+    border: 1px solid rgba(34,197,94,0.2);
     color: var(--green);
-    font-size: 0.68rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
     padding: 0.25rem 0.8rem;
-    border-radius: 100px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    border-radius: var(--radius-xs);
+    font-weight: 400;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 .ml-stats-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
+    position: relative;
+    z-index: 1;
 }
 .ml-stat-card {
-    background: var(--bg-subtle);
+    background: var(--bg-2);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 1.1rem 1.2rem;
-    text-align: center;
+    padding: 1.2rem 1.4rem;
     transition: border-color 0.2s;
 }
-.ml-stat-card:hover { border-color: var(--border-med); }
+.ml-stat-card:hover { border-color: var(--border-hi); }
 .ml-stat-val {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: var(--text-primary);
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-1);
     line-height: 1;
     margin-bottom: 0.3rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
 }
 .ml-stat-val.accent { color: var(--blue); }
 .ml-stat-val.good   { color: var(--green); }
 .ml-stat-val.warn   { color: var(--amber); }
 .ml-stat-lbl {
-    font-size: 0.68rem;
-    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-3);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    font-weight: 500;
 }
-.ml-accuracy-bar-wrap { margin-top: 0.8rem; }
+.ml-accuracy-bar-wrap { margin-top: 1rem; }
 .ml-accuracy-label {
     display: flex;
     justify-content: space-between;
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-bottom: 0.35rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-3);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.04em;
 }
 .ml-accuracy-bar {
-    height: 5px;
-    background: var(--border);
+    height: 3px;
+    background: var(--bg-3);
     border-radius: 100px;
     overflow: hidden;
 }
@@ -580,93 +671,207 @@ html, body, [class*="css"] {
     height: 100%;
     background: linear-gradient(90deg, var(--blue), #60A5FA);
     border-radius: 100px;
-    transition: width 1s ease;
+    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
 }
 .ml-predict-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
+    gap: 0.6rem;
+    position: relative;
+    z-index: 1;
 }
 .ml-predict-card {
-    background: var(--blue-light);
-    border: 1px solid rgba(37,99,235,0.15);
+    background: var(--bg-2);
+    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 0.9rem 1rem;
+    padding: 1rem;
     text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+}
+.ml-predict-card:hover {
+    border-color: rgba(59,130,246,0.3);
+    background: var(--bg-3);
 }
 .ml-predict-hour {
-    font-size: 0.65rem;
-    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-3);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.5rem;
 }
 .ml-predict-val {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
     color: var(--blue);
     line-height: 1;
+    letter-spacing: -0.03em;
 }
 .ml-predict-label {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    margin-top: 0.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text-3);
+    margin-top: 0.3rem;
+    letter-spacing: 0.06em;
 }
 
 /* ── FILE UPLOADER ── */
 [data-testid="stFileUploader"] {
-    background: var(--bg-card) !important;
-    border: 2px dashed var(--border-med) !important;
+    background: var(--bg-1) !important;
+    border: 1px dashed var(--border-med) !important;
     border-radius: var(--radius-lg) !important;
     transition: border-color 0.2s !important;
 }
 [data-testid="stFileUploader"]:hover {
-    border-color: var(--accent) !important;
+    border-color: var(--copper) !important;
+}
+[data-testid="stFileUploader"] label,
+[data-testid="stFileUploader"] p,
+[data-testid="stFileUploader"] span {
+    color: var(--text-2) !important;
 }
 
-/* ── PLOTLY CHARTS — Fondo blanco ── */
+/* ── PLOTLY ── */
 .js-plotly-plot { border-radius: var(--radius-md); overflow: hidden; }
+            
 
-/* ── CHAT INPUT ── */
-[data-testid="stChatInput"] textarea {
-    background: var(--bg-subtle) !important;
-    border-color: var(--border-med) !important;
-    color: var(--text-primary) !important;
-    border-radius: var(--radius-md) !important;
-    font-family: 'DM Sans', sans-serif !important;
+/* ── CHATGPT STYLE INPUT ───────────────────────── */
+
+[data-testid="stBottom"] {
+    background: transparent !important;
+    height: auto !important;
 }
-[data-testid="stChatInput"] textarea:focus {
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 3px rgba(212,82,26,0.1) !important;
+
+[data-testid="stBottom"] > div {
+    background: transparent !important;
+    padding: 0.8rem 0 1rem 0 !important;
+}
+
+/* CONTENEDOR GENERAL */
+[data-testid="stChatInput"] {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+            
+
+            
+/* CAJA PRINCIPAL */
+[data-testid="stChatInput"] > div {
+    background: rgba(255,255,255,0.98) !important;
+    border: 1px solid #E4E4E7 !important;
+    border-radius: 18px !important;
+    min-height: 56px !important;
+
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 8px 30px rgba(0,0,0,0.06) !important;
+
+    transition: all 0.2s ease !important;
+}
+
+/* EFECTO FOCUS */
+[data-testid="stChatInput"] > div:focus-within {
+    border: 1px solid rgba(200,98,42,0.45) !important;
+
+    box-shadow:
+        0 0 0 4px rgba(200,98,42,0.08),
+        0 10px 35px rgba(0,0,0,0.08) !important;
+}
+
+/* TEXTAREA */
+[data-testid="stChatInput"] textarea {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    color: #18181B !important;
+
+    font-family: 'Geist', sans-serif !important;
+    font-size: 0.92rem !important;
+    line-height: 1.5 !important;
+
+    min-height: 24px !important;
+    max-height: 140px !important;
+
+    padding: 1rem 0.2rem 1rem 0.2rem !important;
+
+    resize: none !important;
+}
+
+/* PLACEHOLDER */
+[data-testid="stChatInput"] textarea::placeholder {
+    color: #A1A1AA !important;
+}
+
+/* BOTÓN SEND */
+[data-testid="stChatInput"] button {
+    background: #C8622A !important;
+    border: none !important;
+
+    width: 38px !important;
+    height: 38px !important;
+
+    border-radius: 12px !important;
+
+    transition: all 0.2s ease !important;
+
+    margin-right: 0.5rem !important;
+    margin-bottom: 0.45rem !important;
+}
+
+/* HOVER BOTÓN */
+[data-testid="stChatInput"] button:hover {
+    background: #B45322 !important;
+    transform: scale(1.04);
+}
+
+/* ICONO */
+[data-testid="stChatInput"] button svg {
+    color: white !important;
 }
 
 /* ── EXPANDER ── */
 [data-testid="stExpander"] {
-    background: var(--bg-card) !important;
+    background: var(--bg-1) !important;
     border: 1px solid var(--border) !important;
     border-radius: var(--radius-md) !important;
+}
+[data-testid="stExpander"] summary {
+    color: var(--text-2) !important;
 }
 
 /* ── DATAFRAME ── */
 [data-testid="stDataFrame"] { border-radius: var(--radius-md) !important; overflow: hidden !important; }
 
 /* ── SPINNER ── */
-[data-testid="stSpinner"] { color: var(--accent) !important; }
+[data-testid="stSpinner"] { color: var(--copper) !important; }
 
 /* ── SLIDER ── */
 [data-testid="stSlider"] > div > div > div > div {
-    background-color: var(--accent) !important;
+    background-color: var(--copper) !important;
+}
+
+/* ── SELECT / INPUT ── */
+[data-testid="stSelectbox"] > div,
+[data-testid="stNumberInput"] input {
+    background: var(--bg-2) !important;
+    border-color: var(--border-med) !important;
+    color: var(--text-1) !important;
 }
 
 /* ── HIDE BRANDING ── */
 #MainMenu, footer, header { visibility: hidden; }
 .stDeployButton { display: none; }
 
-/* ── ALERT/INFO TEXT STRONG ── */
-.audit-text strong { color: var(--text-primary); font-weight: 600; }
+/* ── COLUMNS gap ── */
+[data-testid="column"] { padding: 0 0.4rem !important; }
 </style>
+
+            
+            
 """, unsafe_allow_html=True)
 
 
@@ -677,36 +882,43 @@ if "data_loaded" not in st.session_state:
     st.session_state.data_loaded = False
 
 
-# ─── PLOTLY THEME — FONDO BLANCO LIMPIO ────────────────────────────────────────
+# ─── PLOTLY THEME — OSCURO PROFESIONAL ─────────────────────────────────────────
 PLOTLY_LAYOUT = dict(
-    paper_bgcolor="#FFFFFF",
-    plot_bgcolor="#FFFFFF",
-    font=dict(color="#5C5A55", family="DM Sans", size=12),
+    paper_bgcolor="#111113",
+    plot_bgcolor="#111113",
+    font=dict(color="#52525B", family="IBM Plex Mono", size=11),
     xaxis=dict(
-        gridcolor="#F0EFEC",
-        linecolor="#E2E0DB",
-        tickfont=dict(color="#9B9890", size=11),
+        gridcolor="rgba(255,255,255,0.04)",
+        linecolor="rgba(255,255,255,0.06)",
+        tickfont=dict(color="#52525B", size=10, family="IBM Plex Mono"),
         zeroline=False,
     ),
     yaxis=dict(
-        gridcolor="#F0EFEC",
-        linecolor="#E2E0DB",
-        tickfont=dict(color="#9B9890", size=11),
+        gridcolor="rgba(255,255,255,0.04)",
+        linecolor="rgba(255,255,255,0.06)",
+        tickfont=dict(color="#52525B", size=10, family="IBM Plex Mono"),
         zeroline=False,
     ),
-    margin=dict(l=12, r=12, t=36, b=12),
+    margin=dict(l=12, r=12, t=40, b=12),
     hoverlabel=dict(
-        bgcolor="#FFFFFF",
-        bordercolor="#E2E0DB",
-        font=dict(color="#1A1916", family="DM Sans"),
+        bgcolor="#18181C",
+        bordercolor="rgba(255,255,255,0.1)",
+        font=dict(color="#F4F4F5", family="IBM Plex Mono", size=11),
     ),
+    title_font=dict(
+    color="#E4E4E7",
+    size=15,
+    family="Geist",
+
+    ), 
+
 )
 
-# Paleta principal
-C_PRIMARY  = "#D4521A"
+# ── Paleta principal ────────────────────────────────────────────────────────────
+C_PRIMARY   = "#C8622A"
 C_SECONDARY = "#E8860A"
-C_BLUE     = "#2563EB"
-COLORS     = [C_PRIMARY, C_SECONDARY, "#2A7D4F", "#2563EB", "#7C3AED", "#0891B2", "#B45309"]
+C_BLUE      = "#3B82F6"
+COLORS      = ["#C8622A", "#E8860A", "#22C55E", "#3B82F6", "#A78BFA", "#06B6D4", "#F59E0B"]
 
 
 # ─── HERO HEADER ───────────────────────────────────────────────────────────────
@@ -714,12 +926,16 @@ st.markdown("""
 <div class="apex-hero">
     <div class="apex-hero-inner">
         <div>
-            <div class="apex-badge">
-                <span class="apex-badge-dot"></span>
-                Dashboard en vivo
+            <div class="apex-status-pill">
+                <span class="apex-status-dot"></span>
+                Sistema activo
             </div>
-            <div class="apex-logo">APEX<span>CO</span> AI</div>
-            <div class="apex-tagline">Auditoría inteligente para concesionarios · Powered by Claude AI</div>
+            <div class="apex-eyebrow">
+                <span class="apex-eyebrow-line"></span>
+                <span class="apex-eyebrow-text">Automotive Intelligence Platform</span>
+            </div>
+            <h1 class="apex-logo">APEX<span class="apex-logo-accent">COIA</span></h1>
+            <div class="apex-tagline">auditoría_inteligente.v2 · claude_ai_engine · concesionarios</div>
         </div>
     </div>
 </div>
@@ -728,10 +944,12 @@ st.markdown("""
 
 # ─── FILE UPLOAD ────────────────────────────────────────────────────────────────
 uploaded_file = st.file_uploader(
-    "📂  Carga el archivo de datos del concesionario",
+    "Carga el archivo de datos del concesionario",
     type=["csv"],
     help="CSV con columnas: fecha, hora, concesionario, vendedor, marca, modelo, precio_lista, descuento, precio_final, visita, venta, canal, estado_lead"
 )
+
+
 
 
 # ─── BLOQUE PRINCIPAL ──────────────────────────────────────────────────────────
@@ -799,11 +1017,30 @@ if uploaded_file is not None:
 
         st.session_state.data_loaded = True
 
-        # ── KPI CARDS ───────────────────────────────────────────────────────
+        # ── FORMATOS COLOMBIA ────────────────────────────────────────────────
+        def format_cop(value):
+            try:
+                value = float(value)
+
+                if value >= 1_000_000_000:
+                    return f"${value/1_000_000_000:.1f}B COP"
+
+                elif value >= 1_000_000:
+                    return f"${value/1_000_000:.1f}M COP"
+
+                elif value >= 1_000:
+                    return f"${value/1_000:.0f}K COP"
+
+                return f"${value:,.0f} COP"
+
+            except:
+                return "$0 COP"
+            
+                # ── KPI CARDS ───────────────────────────────────────────────────────
         st.markdown('<div class="section-eyebrow">Resumen operativo</div>', unsafe_allow_html=True)
 
         conv_pct   = metrics['conversion']
-        conv_cls   = "good"    if conv_pct >= 0.20 else "bad"
+        conv_cls   = "good" if conv_pct >= 0.20 else "bad"
         conv_label = "✓ Buena conversión" if conv_pct >= 0.20 else "↓ Conversión baja"
 
         c1, c2, c3, c4 = st.columns(4)
@@ -812,8 +1049,8 @@ if uploaded_file is not None:
             st.markdown(f"""
             <div class="metric-card">
                 <div class="metric-card-accent"></div>
-                <span class="metric-icon">🏷️</span>
-                <div class="metric-value">{metrics['total_ventas']:.0f}</div>
+                <span class="metric-icon">◉</span>
+                <div class="metric-value">{int(metrics['total_ventas']):,}</div>
                 <div class="metric-label">Ventas totales</div>
             </div>
             """, unsafe_allow_html=True)
@@ -822,8 +1059,8 @@ if uploaded_file is not None:
             st.markdown(f"""
             <div class="metric-card">
                 <div class="metric-card-accent"></div>
-                <span class="metric-icon">👥</span>
-                <div class="metric-value">{metrics['total_visitas']:.0f}</div>
+                <span class="metric-icon">◉</span>
+                <div class="metric-value">{int(metrics['total_visitas']):,}</div>
                 <div class="metric-label">Visitas totales</div>
             </div>
             """, unsafe_allow_html=True)
@@ -832,8 +1069,8 @@ if uploaded_file is not None:
             st.markdown(f"""
             <div class="metric-card">
                 <div class="metric-card-accent"></div>
-                <span class="metric-icon">📈</span>
-                <div class="metric-value">{conv_pct:.1%}</div>
+                <span class="metric-icon">◉</span>
+                <div class="metric-value metric-percent">{conv_pct:.1%}</div>
                 <div class="metric-label">Tasa de conversión</div>
                 <span class="metric-delta {conv_cls}">{conv_label}</span>
             </div>
@@ -843,8 +1080,8 @@ if uploaded_file is not None:
             st.markdown(f"""
             <div class="metric-card">
                 <div class="metric-card-accent"></div>
-                <span class="metric-icon">💰</span>
-                <div class="metric-value">${metrics['ticket_promedio']:,.0f}</div>
+                <span class="metric-icon">◉</span>
+                <div class="metric-value">{format_cop(metrics['ticket_promedio'])}</div>
                 <div class="metric-label">Ticket promedio</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1034,16 +1271,28 @@ if uploaded_file is not None:
 
         st.markdown('<div class="apex-divider"></div>', unsafe_allow_html=True)
 
-        # ── ML SECTION ──────────────────────────────────────────────────────
-        st.markdown('<div class="section-eyebrow">Machine Learning · Predicción de ventas</div>', unsafe_allow_html=True)
-        st.markdown('<div class="section-heading">🧠 Motor predictivo APEX</div>', unsafe_allow_html=True)
+
+               # ── ML SECTION ──────────────────────────────────────────────────────
+        st.markdown(
+            '<div class="section-eyebrow">Machine Learning · Predicción de ventas</div>',
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            '<div class="section-heading">🧠 Motor predictivo APEX</div>',
+            unsafe_allow_html=True
+        )
 
         if not has_ml_cols:
             st.markdown("""
             <div class="audit-card warning">
                 <span class="audit-icon">⚠️</span>
-                <span class="audit-text">El dataset no contiene las columnas <strong>hora</strong>,
-                <strong>ventas</strong> y <strong>visitas</strong> necesarias para entrenar el modelo predictivo.</span>
+                <span class="audit-text">
+                    El dataset no contiene las columnas
+                    <strong>hora</strong>,
+                    <strong>ventas</strong> y
+                    <strong>visitas</strong>
+                    necesarias para entrenar el modelo predictivo.
+                </span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1051,86 +1300,110 @@ if uploaded_file is not None:
             st.markdown(f"""
             <div class="audit-card danger">
                 <span class="audit-icon">❌</span>
-                <span class="audit-text">Error al entrenar el modelo: <strong>{ml_result['error']}</strong></span>
+                <span class="audit-text">
+                    Error al entrenar el modelo:
+                    <strong>{ml_result['error']}</strong>
+                </span>
             </div>
             """, unsafe_allow_html=True)
 
         else:
-            ml_mae         = ml_result.get("mae", 0)
+            ml_mae = ml_result.get("mae", 0)
             ml_predictions = ml_result.get("predictions", [])
 
-            accuracy_pct = max(0.0, min(100.0, 100.0 - (ml_mae / max(metrics['total_ventas'], 1)) * 100)) if ml_mae is not None else 0.0
-            acc_cls  = "good"   if accuracy_pct >= 80  else ("warn" if accuracy_pct >= 60 else "accent")
-            mae_cls  = "good"   if ml_mae <= 2          else ("warn" if ml_mae <= 5 else "accent")
-            mae_bar  = max(10,  100 - ml_mae * 10)
-            acc_bar  = accuracy_pct
+            try:
+                ml_mae = float(ml_mae)
+            except Exception:
+                ml_mae = 0.0
+
+            base_sales = max(float(metrics.get("total_ventas", 1)), 1.0)
+
+            if ml_mae is not None:
+                accuracy_pct = max(0.0, min(100.0, 100.0 - ((ml_mae / base_sales) * 100)))
+            else:
+                accuracy_pct = 0.0
+
+            acc_cls = "good" if accuracy_pct >= 80 else ("warn" if accuracy_pct >= 60 else "accent")
+            mae_cls = "good" if ml_mae <= 2 else ("warn" if ml_mae <= 5 else "accent")
+            mae_bar = int(max(10, min(100, 100 - (ml_mae * 10))))
+            acc_bar = int(max(0, min(100, accuracy_pct)))
 
             preds_to_show = ml_predictions[:8]
+
             pred_cards_html = ""
             for p in preds_to_show:
-                hora  = p.get("hora", 0)
-                valor = p.get("ventas_pred", p.get("pred", 0))
-                pred_cards_html += f"""
-                    <div class="ml-predict-card">
-                        <div class="ml-predict-hour">{hora:02d}:00 h</div>
-                        <div class="ml-predict-val">{valor:.1f}</div>
-                        <div class="ml-predict-label">ventas est.</div>
-                    </div>"""
+                hora = int(p.get("hora", 0))
+                try:
+                    valor = float(p.get("ventas_pred", p.get("pred", 0)))
+                except Exception:
+                    valor = 0.0
+                pred_cards_html += (
+                    f'<div class="ml-predict-card">'
+                    f'<div class="ml-predict-hour">{hora:02d}:00 h</div>'
+                    f'<div class="ml-predict-val">{valor:.1f}</div>'
+                    f'<div class="ml-predict-label">ventas est.</div>'
+                    f'</div>'
+                )
 
-            st.markdown(f"""
-            <div class="ml-section">
-                <div class="ml-header">
-                    <div class="ml-icon-wrap">🧠</div>
-                    <div>
-                        <div class="ml-title">Modelo predictivo entrenado</div>
-                        <div class="ml-subtitle">Regresión supervisada sobre datos históricos del concesionario</div>
-                    </div>
-                    <div class="ml-badge">✓ Activo</div>
+            ml_html = f"""
+<div class="ml-section">
+    <div class="ml-header">
+        <div class="ml-icon-wrap">🧠</div>
+        <div>
+            <div class="ml-title">Modelo predictivo entrenado</div>
+            <div class="ml-subtitle">Regresión supervisada sobre datos históricos del concesionario</div>
+        </div>
+        <div class="ml-badge">✓ Activo</div>
+    </div>
+    <div class="ml-stats-row">
+        <div class="ml-stat-card">
+            <div class="ml-stat-val {mae_cls}">{ml_mae:.2f}</div>
+            <div class="ml-stat-lbl">Error promedio (MAE)</div>
+            <div class="ml-accuracy-bar-wrap">
+                <div class="ml-accuracy-label">
+                    <span>Precisión del error</span><span>{mae_bar}%</span>
                 </div>
-
-                <div class="ml-stats-row">
-                    <div class="ml-stat-card">
-                        <div class="ml-stat-val {mae_cls}">{ml_mae:.2f}</div>
-                        <div class="ml-stat-lbl">Error promedio (MAE)</div>
-                        <div class="ml-accuracy-bar-wrap">
-                            <div class="ml-accuracy-label"><span>Precisión del error</span><span>{mae_bar:.0f}%</span></div>
-                            <div class="ml-accuracy-bar">
-                                <div class="ml-accuracy-fill" style="width:{mae_bar:.0f}%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ml-stat-card">
-                        <div class="ml-stat-val {acc_cls}">{accuracy_pct:.1f}%</div>
-                        <div class="ml-stat-lbl">Precisión estimada</div>
-                        <div class="ml-accuracy-bar-wrap">
-                            <div class="ml-accuracy-label"><span>Precisión</span><span>{acc_bar:.0f}%</span></div>
-                            <div class="ml-accuracy-bar">
-                                <div class="ml-accuracy-fill" style="width:{acc_bar:.0f}%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ml-stat-card">
-                        <div class="ml-stat-val accent">{len(ml_predictions)}</div>
-                        <div class="ml-stat-lbl">Predicciones generadas</div>
-                        <div class="ml-accuracy-bar-wrap">
-                            <div class="ml-accuracy-label"><span>Cobertura</span><span>100%</span></div>
-                            <div class="ml-accuracy-bar">
-                                <div class="ml-accuracy-fill" style="width:100%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ml-predict-row">
-                    {pred_cards_html}
+                <div class="ml-accuracy-bar">
+                    <div class="ml-accuracy-fill" style="width:{mae_bar}%;"></div>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+        </div>
+        <div class="ml-stat-card">
+            <div class="ml-stat-val {acc_cls}">{accuracy_pct:.1f}%</div>
+            <div class="ml-stat-lbl">Precisión estimada</div>
+            <div class="ml-accuracy-bar-wrap">
+                <div class="ml-accuracy-label">
+                    <span>Precisión</span><span>{acc_bar}%</span>
+                </div>
+                <div class="ml-accuracy-bar">
+                    <div class="ml-accuracy-fill" style="width:{acc_bar}%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-stat-card">
+            <div class="ml-stat-val accent">{len(ml_predictions)}</div>
+            <div class="ml-stat-lbl">Predicciones generadas</div>
+            <div class="ml-accuracy-bar-wrap">
+                <div class="ml-accuracy-label">
+                    <span>Cobertura</span><span>100%</span>
+                </div>
+                <div class="ml-accuracy-bar">
+                    <div class="ml-accuracy-fill" style="width:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ml-predict-row">
+        {pred_cards_html}
+    </div>
+</div>
+"""
+            st.markdown(ml_html, unsafe_allow_html=True)
 
             # Gráfico Real vs Predicho
             if ml_predictions:
                 import pandas as _pd
-                pred_df  = _pd.DataFrame(ml_predictions)
+                pred_df = _pd.DataFrame(ml_predictions)
                 real_col = "ventas"      if "ventas"      in pred_df.columns else None
                 pred_col = "ventas_pred" if "ventas_pred" in pred_df.columns else ("pred" if "pred" in pred_df.columns else None)
                 hora_col = "hora"        if "hora"        in pred_df.columns else None
@@ -1182,7 +1455,7 @@ if uploaded_file is not None:
             insights.append(("danger", "⚠️",
                 "La tasa de conversión general es baja. Se recomienda revisar el seguimiento comercial y la calidad de los leads."))
 
-        if low_conv_df is not None and len(low_conv_df) > 0:
+        if low_conv_df is not None and len(low_conv_df) > 0:    
             horas = low_conv_df["hora_int"].tolist()[:5]
             insights.append(("warning", "📉",
                 f"Se detectaron horarios críticos con baja conversión: <strong>{horas}</strong>"))
@@ -1194,7 +1467,7 @@ if uploaded_file is not None:
 
         if brands_df is not None and len(brands_df) > 0:
             top_brand = brands_df.iloc[0]
-            insights.append(("info", "🚗",
+            insights.append(("info", "◉",
                 f"La marca con mejor desempeño actual es <strong>{top_brand['marca']}</strong>."))
 
         if not insights:
@@ -1215,44 +1488,55 @@ if uploaded_file is not None:
 
         st.markdown('<div class="apex-divider"></div>', unsafe_allow_html=True)
 
+
+
+
+
         # ── CHAT ────────────────────────────────────────────────────────────
         st.markdown("""
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            APEX AI LOCAL ENGINE — Ollama · Privado · Sin consumo de créditos
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;
+            background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);
+            color:#22C55E;font-size:0.6rem;padding:0.3rem 0.8rem;
+            border-radius:4px;font-family:'IBM Plex Mono',monospace;
+            letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem;">
+            <span style="width:5px;height:5px;background:#22C55E;border-radius:50%;
+                box-shadow:0 0 6px #22C55E;display:inline-block;"></span>
+            APEX AI · Privado · Sin consumo de créditos
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div class="chat-wrapper">
-            <div class="chat-header">
-                <div class="chat-header-dot"></div>
-                <div>
-                    <div class="chat-header-title">APEX — Asistente de Auditoría</div>
-                    <div class="chat-header-sub">Pregúntame sobre ventas, conversión, vendedores, horarios o estrategia</div>
-                </div>
+        <div style="background:#FAFAFA;border:1px solid #E2E0DB;
+            border-radius:8px 8px 0 0;padding:0.7rem 1.2rem;
+            border-bottom:1px solid #E2E0DB;">
+            <div style="font-family:'Syne',sans-serif;font-size:0.82rem;
+                font-weight:700;color:#1A1916;">APEX Intelligence Engine</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;
+                color:#9B9890;margin-top:0.1rem;">
+                Pregúntame sobre ventas, conversión, vendedores, horarios o estrategia
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Historial de mensajes
         for msg in st.session_state.messages:
             if msg["role"] == "user":
                 st.markdown(f"""
-                <div class="msg-label user">Tú</div>
-                <div class="msg-user">{msg["content"]}</div>
+                <div style="margin:0.4rem 0;">
+                    <div class="msg-label user">Tú</div>
+                    <div class="msg-user">{msg["content"]}</div>
+                </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown(f"""
-                <div class="msg-label apex">⬡ APEX</div>
-                <div class="msg-assistant">{msg["content"]}</div>
+                <div style="margin:0.4rem 0;">
+                    <div class="msg-label apex">APEX</div>
+                    <div class="msg-assistant">{msg["content"]}</div>
+                </div>
                 """, unsafe_allow_html=True)
 
-        # Input del chat
         prompt = st.chat_input("Pregúntale a APEX sobre tu operación...")
         if prompt:
             st.session_state.messages.append({"role": "user", "content": prompt})
-
             with st.spinner("APEX está analizando..."):
                 response = get_chat_response(
                     user_text=prompt,
@@ -1264,7 +1548,6 @@ if uploaded_file is not None:
                     low_conversion_df=low_conv_df,
                     conversation_history=st.session_state.messages[:-1]
                 )
-
             st.session_state.messages.append({"role": "assistant", "content": response})
             st.rerun()
 
