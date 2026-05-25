@@ -227,30 +227,124 @@ APEXCO IA
 | dotenv | Variables de entorno |
 
 ---
-
 # 🖼️ Capturas de Pantalla
 
-## Dashboard Ejecutivo
+## 📊 Dashboard Ejecutivo Inteligente
 
-```text
-[ INSERTAR SCREENSHOT DEL DASHBOARD ]
-```
+Visualización avanzada de métricas operativas y comerciales en tiempo real.
+
+- Conversión comercial
+- Rendimiento de vendedores
+- Tráfico operativo
+- KPIs estratégicos
+- Ticket promedio
+- Desempeño por marcas
+- Análisis temporal inteligente
+
+![Dashboard Ejecutivo](assets/imagen1.jpeg)
 
 ---
 
-## IA Conversacional
+## 🤖 IA Conversacional Integrada
 
-```text
-[ INSERTAR SCREENSHOT DEL CHAT IA ]
-```
+Asistente impulsado por Claude AI capaz de analizar contexto operacional y responder preguntas estratégicas sobre el negocio en tiempo real.
+
+### Ejemplos:
+- “¿Qué horarios tienen baja conversión?”
+- “¿Qué vendedor tiene mejor rendimiento?”
+- “¿Qué marca genera más ventas?”
+- “Simula un aumento de tráfico del 20%.”
+
+![IA Conversacional](assets/imagen2.jpeg)
 
 ---
 
-## Simulador Predictivo
+## 🧠 Auditoría Operacional Inteligente
 
-```text
-[ INSERTAR SCREENSHOT DEL SIMULADOR ]
-```
+Motor automático de detección de patrones, anomalías y oportunidades comerciales invisibles.
+
+### Capacidades:
+- Detección de pérdidas silenciosas
+- Identificación de horarios críticos
+- Análisis de eficiencia operacional
+- Insights automáticos impulsados por IA
+- Recomendaciones accionables
+
+![Auditoría Inteligente](assets/imagen3.jpeg)
+
+---
+
+## 📈 Simulación Predictiva
+
+Sistema de proyección operacional capaz de modelar escenarios comerciales en tiempo real.
+
+### Permite:
+- Simular incremento de vendedores
+- Evaluar impacto de campañas
+- Analizar cambios en conversión
+- Proyectar ingresos operativos
+- Optimizar desempeño comercial
+
+![Simulador Predictivo](assets/imagen4.jpeg)
+
+---
+
+## 🔍 Insights Inteligentes
+
+Generación automática de insights estratégicos basados en comportamiento real del concesionario.
+
+### Detecta automáticamente:
+- Horarios con baja conversión
+- Patrones comerciales ocultos
+- Vendedores top performance
+- Oportunidades de optimización
+- Riesgos operativos
+
+![Insights Inteligentes](assets/imagen5.jpeg)
+
+---
+
+# 📈 Resultados Detectados
+
+APEXCO IA ya es capaz de analizar operaciones reales de concesionarios automotrices mediante inteligencia operacional y analítica avanzada.
+
+## Capacidades demostradas
+
+- ✅ Análisis de más de 26,000 visitas comerciales
+- ✅ Procesamiento de más de 8,000 ventas operativas
+- ✅ Detección automática de horarios con conversión menor al 15%
+- ✅ Identificación de vendedores top performance
+- ✅ Predicción operativa mediante Machine Learning
+- ✅ Simulación de escenarios comerciales
+- ✅ Generación de recomendaciones accionables
+- ✅ Insights automáticos impulsados por IA
+- ✅ Análisis de tráfico y comportamiento temporal
+- ✅ Detección de oportunidades invisibles
+
+---
+
+# 💰 Modelo SaaS
+
+APEXCO IA opera bajo un modelo SaaS B2B diseñado para concesionarios automotrices.
+
+| Concepto | Valor |
+|---|---|
+| Suscripción mensual | $499.000 COP |
+| Setup e integración inicial | $1.000.000 COP |
+| Tipo de negocio | SaaS B2B |
+| Escalabilidad | Multi-concesionario |
+| Mercado objetivo | LATAM |
+| Modelo operativo | Suscripción recurrente |
+
+## Visión Comercial
+
+El modelo busca construir una plataforma escalable capaz de convertirse en la capa de inteligencia operacional para concesionarios en Latinoamérica.
+
+La estrategia está enfocada en:
+- ingresos recurrentes,
+- expansión regional,
+- arquitectura enterprise,
+- y crecimiento SaaS sostenible a largo plazo.
 
 ---
 
@@ -260,167 +354,3 @@ APEXCO IA
 
 ```bash
 git clone https://github.com/JHONATHANUNI/APEXCO-IA-2026.git
-```
-
----
-
-## 2. Entrar al proyecto
-
-```bash
-cd APEXCO-IA-2026
-```
-
----
-
-## 3. Crear entorno virtual
-
-### macOS / Linux
-```bash
-python3 -m venv .venv
-```
-
-### Windows
-```bash
-python -m venv .venv
-```
-
----
-
-## 4. Activar entorno virtual
-
-### macOS / Linux
-```bash
-source .venv/bin/activate
-```
-
-### Windows CMD
-```bash
-.venv\Scripts\activate
-```
-
-### Windows PowerShell
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
----
-
-## 5. Instalar dependencias
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 6. Configurar variables de entorno
-
-Crear archivo `.env`
-
-```bash
-touch .env
-```
-
-Agregar:
-
-```env
-ANTHROPIC_API_KEY=tu_api_key
-```
-
----
-
-## 7. Ejecutar plataforma
-
-```bash
-streamlit run app.py
-```
-
----
-
-# 🔐 Variables de Entorno
-
-| Variable | Descripción |
-|---|---|
-| `ANTHROPIC_API_KEY` | API Key de Claude AI (Anthropic) |
-
----
-
-# 🛣️ Roadmap Futuro
-
-## Próximas capacidades
-
-- 🧠 Detección avanzada de anomalías
-- 📈 Forecasting con IA
-- 🏢 Arquitectura multi-tenant
-- 🔔 Alertas operativas en tiempo real
-- 🔌 Integraciones con ERP / DMS
-- 📊 Benchmarking entre concesionarios
-- 🤖 AI Operational Scoring
-- 🌎 Multi-sucursal
-- 📱 Dashboard móvil ejecutivo
-- ⚡ Analítica en tiempo real
-
----
-
-# 🎯 ¿Por qué APEXCO IA importa?
-
-La industria automotriz está entrando en una nueva era donde la velocidad de decisión y la inteligencia operacional definirán la competitividad.
-
-APEXCO IA no busca ser otro dashboard.
-
-Busca convertirse en:
-
-- una capa de inteligencia operacional,
-- un copiloto estratégico,
-- y un sistema capaz de entender el negocio en tiempo real.
-
-El futuro de los concesionarios no será gestionado únicamente por reportes.
-
-Será impulsado por inteligencia artificial.
-
----
-
-# 📦 Estructura del Repositorio
-
-```text
-APEXCO-IA-2026/
-│
-├── data/
-├── src/
-├── utils/
-├── app.py
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
----
-
-# 🤝 Contribuciones
-
-Las contribuciones, ideas y colaboraciones son bienvenidas.
-
-Si deseas aportar al ecosistema de inteligencia automotriz:
-
-1. Haz un fork
-2. Crea una rama feature
-3. Realiza tus cambios
-4. Envía un Pull Request
-
----
-
-# 📄 Licencia
-
-Este proyecto está bajo la licencia MIT.
-
----
-
-<div align="center">
-
-# 🚘 APEXCO IA
-
-### Inteligencia operacional para la nueva generación automotriz.
-
-Construido con IA, analítica avanzada y visión de producto.
-
-</div>
